@@ -9,7 +9,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-west-2"  # Specify your desired region here
+  region = "us-east-1"  # Specify your desired region here
 }
 
 resource "aws_vpc" "main" {
