@@ -8,22 +8,21 @@ terraform {
   }
 }
 
-
-# Provider Block
 provider "aws" {
-  region  = "us-east-1"
-  profile = "default"
+  region = "us-west-2"  # Specify your desired region here
 }
-/*
-Note-1:  AWS Credentials Profile (profile = "default") configured on your local desktop terminal  
-$HOME/.aws/credentials
-*/
-# Create EC2 Instance
-resource "aws_instance" "web" {
-  ami           = "ami-053b0d53c279acc90" # Amazon Linux
-  instance_type = "t2.micro"
-   key_name     = "ec2-create"
+
+resource "aws_vpc" "main" {
+  cidr_block = "10.0.0.0/16"  # Specify the CIDR block for your VPC
+  enable_dns_support = true
+  enable_dns_hostnames = true
+
   tags = {
-    "Name" = "web"
+    Name = "my-vpc"
   }
 }
+
+output "vpc_id" {
+  value = aws_vpc.main.id
+}
+
